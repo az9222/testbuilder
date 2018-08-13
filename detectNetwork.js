@@ -1,18 +1,63 @@
-// Given a credit card number, this function should return a string with the 
-// name of a network, like 'MasterCard' or 'American Express'
-// Example: detectNetwork('343456789012345') should return 'American Express'
-
-// How can you tell one card network from another? Easy! 
-// There are two indicators:
-//   1. The first few numbers (called the prefix)
-//   2. The number of digits in the number (called the length)
-
 var detectNetwork = function(cardNumber) {
-  // Note: `cardNumber` will always be a string
-  // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
-  // The American Express network always starts with a 34 or 37 and is 15 digits long
+  var info = {
+    "Diner\'s Club": {
+      prefix: ['38', '39'],
+      length: [14]
+    },
+    "American Express": {
+      prefix: ['34', '37'],
+      length: [15]
+    },
+    "Visa": {
+      prefix: ['4'],
+      length: [13, 16, 19]
+    },
+    "MasterCard": {
+      prefix: ['51', '52', '53', '54', '55'],
+      length: [16]
+    },
+    "Discover": {
+      prefix: ['6011'],
+      length: [16, 19]
+    },
+    "Maestro": {
+      prefix: ['5018', '5020', '5038', '5893', '6304', '6759', '6761', '6762', '6763'],
+      length: [16, 17, 18, 19]
+    },
+    "China Union Pay": {
+      prefix: ['62', '88'],
+      length: [16]
+    }
+  }
+  for (var prop in info) {
+    var cardInfo = info[prop];
+    var prefix = cardInfo.prefix;
+    var length = cardInfo.length;
+    var prefixLength = prefix[0].length;
+    var cardNumberPrefix = cardNumber.slice(0, prefixLength);
+    var cardNumberLength = cardNumber.length;
+    if (length.includes(cardNumberLength) && prefix.includes(cardNumberPrefix)) {
+      return prop;
+    }
+  }
+  return "Not available"
+}
 
-  // Once you've read this, go ahead and try to implement this function, then return to the console.
-};
-
-
+//Solving with Regx!
+//   var creditCardRegex = {
+//     "Diner\'s Club": /^3[89][0-9]{12}$/, 
+//     "American Express": /^3[47][0-9]{13}$/,
+//     "Mastercard": /^5[1-5][0-9]{14}$/,
+//     "Visa": /^4[0-9]{12}(?:[0-9]{3})?(?:[0-9]{3})?$/,
+//     "Discover": /^[6][0][1][1][0-9]{12}(?:[0-9]{3})?$/,
+//     "Maestro": /^(5018|5020|5038|6304|6759|6761|6763)[0-9]{12,15}$/,
+//     "China Union Pay": /^(62|88)[0-9]{14}$/
+//   }
+  
+//   for(var card in creditCardRegex) {
+//     if(cardNumber.match(creditCardRegex[card])) {
+//       return card;
+//     }
+//   }
+//   return "None available. Please re-enter information and try again.";
+// };
