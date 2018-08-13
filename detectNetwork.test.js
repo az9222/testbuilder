@@ -6,53 +6,51 @@
 // You don't actually want to fill *this* value in on line 9, but you'll see
 // other places in this file where you'll replace the FILL_ME_IN with a
 // different value.
-var FILL_ME_IN = 'Fill this value in';
+// var FILL_ME_IN = 'Fill this value in';
  
-describe('Introduction to Mocha Tests - READ ME FIRST', function() {
-  // A Mocha test is just a function!
-  // If the function throws an error when run, it fails.
-  // If it doesn't throw an error when run, it doesn't fail. 
-  // To read more about mocha, visit mochajs.org
+// describe('Introduction to Mocha Tests - READ ME FIRST', function() {
+//   // A Mocha test is just a function!
+//   // If the function throws an error when run, it fails.
+//   // If it doesn't throw an error when run, it doesn't fail. 
+//   // To read more about mocha, visit mochajs.org
 
-  // Once you've read and understood this section, please comment it out. 
-  // You will not be able to proceed with a failing test. 
+//   // Once you've read and understood this section, please comment it out. 
+//   // You will not be able to proceed with a failing test. 
 
-  it('Throws an error so it fails', function() {
-    throw new Error('Delete me!');
-  });
+//   it('Throws an error so it fails', function() {
+//     throw new Error('Delete me!');
+//   });
 
-  it('Doesn\'t throw an error, so it doesn\'t fail', function() {
-    // This test doesn't really test anything at all! It will pass no matter what.
-    var even = function(num){
-      return num/2 === 0;
-    }
-    return even(10) === true;
-  });
+  // it('Doesn\'t throw an error, so it doesn\'t fail', function() {
+  //   // This test doesn't really test anything at all! It will pass no matter what.
+  //   var even = function(num){
+  //     return num/2 === 0;
+  //   }
+  //   return even(10) === true;
+  // });
 
   // In tests, we want to compare the expected behavior to the actual behavior.
   // A test should only fail if the expected behavior doesn't match the actual.
-  it('Throws an error when expected behavior does not match actual behavior', function() {
-    var even = function(num){
-      return num/2 === 0;
-    }
+//   it('Throws an error when expected behavior does not match actual behavior', function() {
+//     var even = function(num){
+//       return num/2 === 0;
+//     }
 
-    if(even(10) !== true) {
-      throw new Error('10 should be even!');
-    }
-  });
-});
+//     if(even(10) !== true) {
+//       throw new Error('10 should be even!');
+//     }
+//   });
+// });
+
 describe('Diner\'s Club', function() {
   // Be careful, tests can have bugs too...
 
   it('has a prefix of 38 and a length of 14', function() {
-    throw new Error('Delete me!');
- 
-    if (detectNetwork('38345678901234') !== 'Diner\'s Club') {
-      throw new Error('Test failed');
-    }
+    expect (detectNetwork('38283947592712')).to.equal('Diner\'s Club');
   });
 
   it('has a prefix of 39 and a length of 14', function() {
+    expect (detectNetwork('3934567890123') === 'Diner\'s Club');
     if (detectNetwork('3934567890123') !== 'Diner\'s Club') {
       throw new Error('Test failed');
     }
@@ -64,10 +62,9 @@ describe('American Express', function() {
   // It can get annoying to keep typing the if/throw, so here is a
   // helper function to throw an error if the input statement isn't true. 
   var assert = function(isTrue) {
-    if(isTrue) {
+    if(!isTrue) {
       throw new Error('Test failed');
     }
- 
   };
 
   it('has a prefix of 34 and a length of 15', function() {
@@ -84,7 +81,7 @@ describe('Visa', function() {
   // Chai provides an assert that acts the same as our previous assert.
   // Search the documentation to figure out how to access it. 
   //   http://chaijs.com/
-  var assert = chai.FILL_ME_IN;
+  var assert = chai.assert;
  
 
   it('has a prefix of 4 and a length of 13', function() {
@@ -107,15 +104,15 @@ describe('MasterCard', function() {
   //   http://chaijs.com/api/bdd/
   var expect = chai.expect;
  
-  it(FILL_ME_IN, function() {
+  it('has a prefix of 51 and a length of 16', function() {
     expect(detectNetwork('5112345678901234')).to.equal('MasterCard');
   });
  
-  it(FILL_ME_IN, function() {
+  it('has a prefix of 52 and a length of 16', function() {
     expect(detectNetwork('5212345678901234')).to.equal('MasterCard');
   });
  
-  it(FILL_ME_IN, function() {
+  it('has a prefix of 53 and a length of 16', function() {
     expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
   });
  
@@ -130,11 +127,11 @@ describe('MasterCard', function() {
   var should = chai.should();
   
   it('has a prefix of 54 and a length of 16', function() {
-    detectNetwork('5412345678901234').should.equal(FILL_ME_IN);
+    detectNetwork('5412345678901234').should.equal('MasterCard');
   });
  
   it('has a prefix of 55 and a length of 16', function() {
-    detectNetwork('5512345678901234').should.equal(FILL_ME_IN);
+    detectNetwork('5512345678901234').should.equal('MasterCard');
   })
  
 });
@@ -142,13 +139,41 @@ describe('MasterCard', function() {
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  it('has a prefix of 6011 and a length of 16');
-  it('has a prefix of 6011 and a length of 19');
+  var expect = chai.expect;
+
+  it('has a prefix of 6011 and a length of 16', function () {
+    expect(detectNetwork('6011830482018304')).to.equal('Discover');
+  });
+  it('has a prefix of 6011 and a length of 19', function () {
+    expect(detectNetwork('6011203840582018204')).to.equal('Discover');
+  });
 });
 
 describe('Maestro', function() {
-  // Write full test coverage for the Maestro card
+  var should = chai.should();
+  it('has a prefix of 5018, 5020, 5038, 5893, 6304, 6759, 6761, 6762, or 6763 AND has a length of 16, 17, 18 or 19', function () {
+    detectNetwork('5018234567890123').should.equal('Maestro');
+    detectNetwork('50202345678901232').should.equal('Maestro');
+    detectNetwork('5038234567890123').should.equal('Maestro');
+    detectNetwork('589323456789012348').should.equal('Maestro');
+    detectNetwork('6304234567890123').should.equal('Maestro');
+    detectNetwork('6759234567890123298').should.equal('Maestro');
+    detectNetwork('6761234567890123').should.equal('Maestro');
+    detectNetwork('67622345678901232').should.equal('Maestro');
+    detectNetwork('676323456789012334').should.equal('Maestro');
+  })
 });
 
-describe('should support China UnionPay')
-describe('should support Switch')
+describe('should support China UnionPay', function(){
+  var should = chai.should();
+  it('has a prefix of 62 or 88 and has a length of 16', function () {
+    detectNetwork('6284919484038602').should.equal('China UnionPay');
+    detectNetwork('8893028495819305').should.equal('China UnionPay');
+  });
+});
+
+// describe('should support Switch', function(){
+//     var should = chai.should();
+//     it("should return 'Card not found. Check your information and try again.'"
+//       detectNetwork('39827492049').should.equal('Card not found. Check your information and try again.')
+// });
