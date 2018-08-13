@@ -24,7 +24,7 @@ var detectNetwork = function(cardNumber) {
       prefix: ['5018', '5020', '5038', '5893', '6304', '6759', '6761', '6762', '6763'],
       length: [16, 17, 18, 19]
     },
-    "China Union Pay": {
+    "China UnionPay": {
       prefix: ['62', '88'],
       length: [16]
     }
