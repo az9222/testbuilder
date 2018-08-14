@@ -263,12 +263,23 @@ describe('Maestro', function() {
 
 describe('should support China UnionPay', function(){
   var should = chai.should();
-  it('has a prefix of 62 or 88 and has a length of 16', function () {
-    detectNetwork('6284919484038602').should.equal('China UnionPay');
-  })
-  it('has a prefix of and has a length of 16', function () {
-    detectNetwork('8893028495819305').should.equal('China UnionPay');
-  });
+  var prefix = '62123456';
+  var suffix = '1234';
+  for (var i = 1000; i < 2000; i++) {
+    var number = prefix + parseInt(i) + suffix;
+    it('has a prefix of 62 and has a length of 16', function () {
+      detectNetwork(number).should.equal('China UnionPay');
+    })
+  }
+  
+  var prefix="88123456";
+  var suffix = "1234";
+  for (var i = 1000; i < 3000; i++) {
+    var number = prefix + parseInt(i) + suffix;
+    it('has a prefix of 88 and has a length of 16', function () {
+      detectNetwork(number).should.equal('China UnionPay');
+    });
+  }
 });
 
 describe('should support Switch', function(){
